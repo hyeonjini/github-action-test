@@ -4,23 +4,24 @@
 name: Python application
 
 on:
-  push:
+  push: # branche에 push 될 때 실행
     branches: [ main ]
-  pull_request:
+  pull_request: # branch에 pr 될 때 실행
     branches: [ main ]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 운영체제 버전
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2 # 사용할 action 선택
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
-    - name: Install dependencies
+    - name: Install dependencies # uses가 없는 경우에는 그냥 bash 파일을 실행한다고 이해
+    # shell 부분
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
